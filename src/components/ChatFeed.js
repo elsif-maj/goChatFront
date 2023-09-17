@@ -3,36 +3,32 @@ import ChatInput from './ChatInput'
 
 function ChatFeed() {
   const [cont, setCont] = useState(["one", "two", "three"])
-  // const [socket, setSocket] = useState(new WebSocket("ws://localhost:3001/ws"))
-  const [sendMsg, setSendMsg] = useState('')
+  const [webSocket, setWebSocket] = useState(null)
 
   useEffect(() => {
     console.log("useEffect triggered")
     const socket = new WebSocket("ws://localhost:3001/ws")
 
     socket.onmessage = (event) => {
-      let newCont = cont.concat(event.data)
-      setCont(newCont)
-      setSendMsg('')
+      console.log("received to WS: ", event.data)
+      setCont((cont) => [...cont, event.data])
     }
 
     socket.onopen = (event) => {
       console.log("opened WS: ", socket)
-      if (sendMsg) {
-        console.log("something to send")
-        socket.send(sendMsg)
-      }
     }
+
+    setWebSocket(socket)
 
     return () => {
       console.log("closed WS: ", socket)
       socket.close();
     }
-  }, [cont, sendMsg])
+  }, [])
 
   return (
     <div>
-      <ChatInput setSendMsg={setSendMsg} />
+      <ChatInput webSocket={webSocket} />
       {cont.map((msg, idx) => (
         <p key={idx}>{msg}</p>
       ))}
