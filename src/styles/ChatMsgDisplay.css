@@ -1,0 +1,31 @@
+/* Style the chat log container */
+.chat-log-container {
+  height: 600px; /* Adjust the height as needed */
+  overflow-y: auto;
+  font-family: monospace; /* Use a generic monospace font */
+  background-color: #1a1a1a; /* Dark background color */
+  color: #00ff00; /* Neon green text color */
+}
+
+/* Style individual chat messages */
+.chat-message {
+  padding: 5px;
+  margin-bottom: 5px;
+  background-color: #333; /* Dark gray background */
+  border: 1px solid #555; /* Slightly darker border */
+  color: #00ff00; /* Neon green text color */
+  font-size: 16px;
+}
+
+/* Style links in messages */
+.chat-message a {
+  color: #0077ff; /* Neon blue link color */
+  text-decoration: underline;
+}
+
+/* Style usernames or timestamps if needed */
+.chat-message .username {
+  color: #ff00ff; /* Magenta username color */
+}
+
+/* Add any other custom styles as needed */
